@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ican</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <nav class="navbar navbar-inverse">
+    <div class="container">
+      <div class="navbar-header">
+        <%= link_to 'iCan', root_path, class: 'navbar-brand' %>
+      </div>
+      <div id="navbar">
+        <ul class="nav navbar-nav">
+        </ul>
+
+        <ul class="nav navbar-nav pull-right">
+          <li class="dropdown">
+            <a class="dropdown-toggle" aria-expanded="false" role="button" data-toggle="dropdown" href="#">
+              Role
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              <% User::ROLES.each do |k, v| %>
+                <li>
+                  <%= link_to session_path(k), method: :patch do %>
+                    <%= v %>
+                    <% if v == current_user.role %>
+                      <small class="text-muted">(current)</small>
+                    <% end %>
+                  <% end %>
+                </li>
+              <% end %>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %>">
+        <%= value %>
+      </div>
+    <% end %>
+    <%= yield %>
+  </div>
+
+</body>
+</html>
