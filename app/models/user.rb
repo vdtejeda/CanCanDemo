@@ -1,5 +1,5 @@
 class User
-  ROLES = {0:guest, 1:user, 2:moderator, 3:admin}
+  ROLES = { 0 => :guest, 1 => :user, 2 => :moderator, 3 => :admin } 
 
   attr_reader :role
 
